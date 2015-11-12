@@ -1,0 +1,43 @@
+{%
+    def most_common(lst):
+        return max(set(lst), key=lst.count)
+%}
+
+{% if part_list %}
+    <table border="1" cellpadding="5" cellspacing="5">
+        <tr>
+            <th>Entry</th>
+            <th>Week 1</th>
+            <th>Week 2</th>
+            <th>Week 3</th>
+            <th>Week 4</th>
+            <th>Week 5</th>
+            <th>Week 6</th>
+        </tr>
+
+        {% for part in part_list %}
+            <tr>
+                <td>{{part.part_name}}</td>
+                {% for week in week_list %}
+                    {% if week.participant_id == part.id %}
+                    <td> {{week.team_abbrv}} </td>
+                    {%endif%}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <td>MAX</td>
+
+            {% for 
+            {% for week in week_list %}
+
+            {% if week.team_abbrv %}
+        </tr>
+
+
+
+    </table>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
