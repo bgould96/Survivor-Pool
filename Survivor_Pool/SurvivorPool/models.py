@@ -17,4 +17,4 @@ class Week(models.Model):
     week = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return str(self.week)
+        return str(self.team_abbrv)

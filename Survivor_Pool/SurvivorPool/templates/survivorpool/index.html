@@ -1,7 +1,5 @@
-{%
-    def most_common(lst):
-        return max(set(lst), key=lst.count)
-%}
+{% load set_var %}
+{% set current_week = 6 %}
 
 {% if part_list %}
     <table border="1" cellpadding="5" cellspacing="5">
@@ -16,25 +14,34 @@
         </tr>
 
         {% for part in part_list %}
-            <tr>
-                <td>{{part.part_name}}</td>
-                {% for week in week_list %}
-                    {% if week.participant_id == part.id %}
-                    <td> {{week.team_abbrv}} </td>
-                    {%endif%}
-                {% endfor %}
-            </tr>
+            {% if part.alive %}
+                <tr>
+                    <td>{{part.part_name}}</td>
+                    {% for week in week_list %}
+                        {% if week.participant_id == part.id %}
+                        <td> {{week.team_abbrv}} </td>
+                        {%endif%}
+                    {% endfor %}
+                </tr>
+            {% endif %}
         {% endfor %}
 
         <tr>
             <td>MAX</td>
 
-            {% for 
-            {% for week in week_list %}
+            {% set week_iter = 1 %}
+            {% for week in max_per_week %}
 
-            {% if week.team_abbrv %}
+                week_iter is {{week_iter}}
+
+                {% if week_iter <= current_week %}
+                    <td>{{week}}</td>
+                {% endif %}
+
+                {% set week_iter = 2 %}
+            {% endfor %}
+
         </tr>
-
 
 
     </table>

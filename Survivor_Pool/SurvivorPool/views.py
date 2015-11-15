@@ -12,6 +12,27 @@ def index(request):
     context = RequestContext(request, {
         'part_list' : part_list,
         'week_list' : week,
+        'max_per_week': find_max_per_week(week)
     })
 
     return HttpResponse(template.render(context))
+
+
+def find_max_per_week(lst):
+        by_week = [0 for x in range(17)]
+
+        for week in range(1,17):
+            week_array = []
+            for team in lst:
+                if team.week == week:
+                    week_array += team.team_abbrv
+            by_week[week] = week_array
+
+        max_week = []
+        curr_week = 1
+        for week in by_week:
+            max_week[curr_week] = max(set(week), key=week.count)
+            curr_week = curr_week + 1
+
+
+        return max_week
